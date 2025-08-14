@@ -351,6 +351,14 @@ cygheap_user::ontherange (homebodies what, struct passwd *pw)
 	      debug_printf ("Set HOME to default /home/USER");
 	      __small_sprintf (home, "/home/%s", name ());
 	      setenv ("HOME", home, 1);
+
+		  // Override: use %HOME%, then %HomeDrive%%HomePath%, then lastly %UserProfile%
+		  if ((p = fetch_home_env ()))
+		  {
+			  debug_printf ("Override msys2's HOME default, to Windows' %HOME%, %HomeDrive%\\%HomePath%, %%UserProfile%");
+			  __small_sprintf (home, "%s", p);
+			  setenv ("HOME", p, 1);  // 1 to overwrite
+		  }
 	    }
 	}
     }
