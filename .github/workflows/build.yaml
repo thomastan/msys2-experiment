@@ -90,6 +90,6 @@ jobs:
         shell: msys2 {0}
         run: uname -a
 
-      - name: Run tests
-        uses: msys2/msys2-tests@main
+      - name: Run tests from thomastan
+        uses: thomastan/msys2-tests@main
 
